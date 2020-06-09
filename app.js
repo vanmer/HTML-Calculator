@@ -30,18 +30,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     displayVal += btnText;
     displayValElement.innerText = displayVal;
+  }
 
+  // Arithmetic operation
+  var performOperation = () => {
+    var operator = clickObj.target.innerText;
+
+    switch (operator) {
+      case '+':
+        pendingVal
+        break;
+      case '-':
+
+        break;
+      default:
+        break;
+    }
   }
 
   // Event Listeners for num and operator buttons
   for (let i = 0; i < calcNumBtns.length; i++) {
     calcNumBtns[i].addEventListener('click', updateDisplayVal, false);
   }
-  // for (let i = 0; i < calcOperatorBtns.length; i++) {
-  //   calcOperatorBtns[i].addEventListener('click', performOperation, false);
-  // }
+  for (let i = 0; i < calcOperatorBtns.length; i++) {
+    calcOperatorBtns[i].addEventListener('click', performOperation, false);
+  }
 
-  // clear Button function
+  // clear Button onclick
   clearBtn.onclick = () => {
     displayVal = '0';
     pendingVal = undefined;
@@ -49,17 +64,22 @@ document.addEventListener('DOMContentLoaded', () => {
     displayValElement.innerHTML = displayVal;
   }
 
-  // backspace Button function
+  // backspace Button onclick
   backspaceBtn.onclick = () => {
     let lengthOfDisplayVal = displayVal.length;
     displayVal = displayVal.slice(0, lengthOfDisplayVal - 1);
-
     if (displayVal === '') {
       displayVal = '0';
     }
-
     displayValElement.innerText = displayVal;
+  }
 
+  // decimal Button onclick
+  decimalBtn.onclick = () => {
+    if (!displayVal.includes('.')) {
+      displayVal += '.';
+    }
+    displayValElement.innerText = displayVal;
   }
 
 
