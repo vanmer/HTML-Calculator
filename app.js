@@ -15,33 +15,61 @@ document.addEventListener('DOMContentLoaded', () => {
   var backspaceBtn = document.getElementById('calc-backspace');
   var displayValElement = document.getElementById('calc-display-val');
 
-  var displayVal = '0';     // display value on the screen
-  var pendingVal;           // pending value (previous value)
+  var displayVal = '0'; // display value on the screen
+  var pendingVal; // pending value (previous value)
   var evalStringArray = []; // holding operations that are pressed/passed
 
   var calcNumBtns = document.getElementsByClassName('calc-btn-num');
   var calcOperatorBtns = document.getElementsByClassName('calc-btn-operator');
 
+  // Display Value
   var updateDisplayVal = (clickObj) => {
     var btnText = clickObj.target.innerText;
 
     if (displayVal === '0') {
-          displayVal = '';
+      displayVal = '';
     }
     displayVal += btnText;
     displayValElement.innerText = displayVal;
   }
 
   // Arithmetic operation
-  var performOperation = () => {
+  var performOperation = (clickObj) => {
     var operator = clickObj.target.innerText;
 
     switch (operator) {
       case '+':
-        pendingVal
+        pendingVal = displayVal;
+        displayVal = '0';
+        displayValElement.innerText = displayVal;
+        evalStringArray.push(pendingVal);
+        evalStringArray.push('+');
         break;
       case '-':
-
+        pendingVal = displayVal;
+        displayVal = '0';
+        displayValElement.innerText = displayVal;
+        evalStringArray.push(pendingVal);
+        evalStringArray.push('-');
+        break;
+      case 'x':
+        pendingVal = displayVal;
+        displayVal = '0';
+        displayValElement.innerText = displayVal;
+        evalStringArray.push(pendingVal);
+        evalStringArray.push('*');
+        break;
+      case '÷':
+        pendingVal = displayVal;
+        displayVal = '0';
+        displayValElement.innerText = displayVal;
+        evalStringArray.push(pendingVal);
+        evalStringArray.push('/');
+        break;
+      case '=':
+        evalStringArray.push(displayVal);
+        var evaluation = eval(evalStringArray.join(' '));
+        displayValElement.innerText = evaluation;
         break;
       default:
         break;
@@ -81,8 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     displayValElement.innerText = displayVal;
   }
-
-
 
 
 
